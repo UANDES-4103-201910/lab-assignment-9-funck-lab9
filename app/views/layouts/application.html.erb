@@ -9,6 +9,45 @@
   </head>
 
   <body>
+
+    <script>
+    $(document).ready(function() {
+      $(document).ready(function() {
+        $.ajaxSetup({ cache: true });
+        $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
+          FB.init({
+            appId: '593346784485914',
+            version: 'v3.3' // or v2.1, v2.2, v2.3, ...
+          });
+          $('#loginbutton,#feedbutton').removeAttr('disabled');
+          FB.getLoginStatus(updateStatusCallback);
+        });
+      });
+    });
+    </script>
+
+    <div class="header-container">
+      <% if user_signed_in? %>
+        <% if current_user.provider != "facebook" %>
+          <h1><%= current_user.name %></h1>
+          <%= form_tag(destroy_user_session_path, method: "delete") do %>
+          <%= submit_tag("Log Out") %>
+          <% end %>
+        <% else %>
+        <h1><%= current_user.name %></h1>
+          <%= form_tag(destroy_user_session_path, method: "delete") do %>
+          <%= submit_tag("Log Out") %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= form_tag(new_user_registration_path, method: "get") do %>
+          <%= submit_tag("Sign In") %>
+        <% end %>
+        <%= form_tag(new_user_session_path, method: "get") do %>
+          <%= submit_tag("Log In") %>
+        <% end %>
+      <% end %>
+    </div>
   	<p id="notice"><%= notice %></p>
     <%= yield %>
   </body>

@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		#complete this method
+		@session = nil
+		user_session = nil
 	end
 end
