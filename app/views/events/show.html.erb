@@ -15,6 +15,7 @@
 </tr>
 
 <% end %>
-
+<% if can? :update, Ticket %>
 <%= link_to 'Edit', edit_event_path(@event) %> |
+<% end %>
 <%= link_to 'Back', events_path %>
