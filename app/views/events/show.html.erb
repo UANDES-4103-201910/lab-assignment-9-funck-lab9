@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+<h1><%= "Event Name: "+ @event.name.to_s %></h1>
+<% @event.tickets.each do |ticket|%>
+<tr>
+  <%= "Ticket description: "+ ticket.description.to_s %>
+  <%= "Place: " + event.place.name.to_s%>
+  <%= "Ticket price : "+ ticket.price.to_s %>
+  <% if can? :purchase, Ticket %>
+    <%= form_tag("#", method: "get") do %>
+    <%= number_field_tag 'quantity', '1' %>
+    <%= submit_tag("Add to shopping cart") %>
+    <% end %>
+  <% end %>
+  <br>
+</tr>
+
+<% end %>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

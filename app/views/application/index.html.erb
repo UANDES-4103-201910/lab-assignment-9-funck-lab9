@@ -1,1 +1,5 @@
-
+<% if can? :read, Event %>
+  <%= form_tag(events_path, method: "get") do %>
+  <%= submit_tag("Events") %>
+  <% end %>
+<% end %>

@@ -27,6 +27,9 @@
     </script>
 
     <div class="header-container">
+      <%= form_tag(:homepage, method: "get") do %>
+      <%= submit_tag("Home") %>
+      <% end %>
       <% if user_signed_in? %>
         <% if current_user.provider != "facebook" %>
           <h1><%= current_user.name %></h1>
@@ -48,7 +51,6 @@
         <% end %>
       <% end %>
     </div>
-  	<p id="notice"><%= notice %></p>
     <%= yield %>
   </body>
 </html>
